@@ -146,6 +146,12 @@ smartphones = [
         "price": 9999,
         "corpus": "Storage32 GBRAM4  SystemMIUI 13 (based on Android 12)Processor TypeMediaTek Helio G85Processor Speed2.0 50MP 2MP 2MP 8MP 5G Capacity5000 Display Size16.59 cm (6.53 inch)Resolution1600 x 720 PixelsResolution TypeHD+ DisplayGPUARM Mali-G52 MC2Display TypeHD+ DisplayOther Display Features60 Hz Refresh Rate, Waterdrop Notch Design"
     },
+    {
+        "name": "REDMI 12 (White, 64 GB)",
+        "ratings": 4.0,
+        "price": 9999,
+        "corpus": "Storage64 GBRAM4  SystemMIUI 13 (based on Android 12)Processor TypeMediaTek Helio G85Processor Speed2.0 50MP 2MP 2MP 8MP 5G Capacity5000 Display Size16.59 cm (6.53 inch)Resolution1600 x 720 PixelsResolution TypeHD+ DisplayGPUARM Mali-G52 MC2Display TypeHD+ DisplayOther Display Features60 Hz Refresh Rate, Waterdrop Notch Design"
+    },
 
     # Add more smartphone data entries here
 ]
@@ -163,3 +169,4 @@ with open(csv_filename, mode="w", newline="", encoding="utf-8") as csv_file:
         writer.writerow(smartphone)
 
 print(f"Dataset saved as {csv_filename}")
+
