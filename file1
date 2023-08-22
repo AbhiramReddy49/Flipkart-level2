@@ -1,0 +1,165 @@
+import csv
+
+# Sample smartphone data
+smartphones = [
+    {
+        "name": "REDMI Note 12 Pro 5G (Onyx Black, 128 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage128 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (Green, 128 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage128 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (White, 128 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage128 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (Blue, 128 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage128 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (Onyx Black, 256 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage256 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (White, 256 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage256 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "REDMI Note 12 Pro 5G (Blue, 256 GB)",
+        "ratings": 4.2,
+        "price": 23999,
+        "corpus": "Storage256 GBRAM6  SystemAndroid 12Processor TypeMediatek Dimensity 1080Processor Speed2.6 50MP 8MP 2MP 50MP 16MP 5G Capacity5000 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, Contrast: 5,000,000:1, 1920Hz PWM Dimming, Brightness Level: 16000:1, Peak Brightness: 900 nits"
+    },
+    {
+        "name": "Samsung Galaxy S22 Ultra (Phantom Black, 256 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage256 GBRAM12  SystemAndroid 12Processor TypeExynos 990Processor Speed2.8 108MP 12MP 12MP 12MP 40MP 5G Capacity5000 Display Size17.53 cm (6.9 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ Dynamic AMOLED DisplayGPUARM Mali-G78 MP14Display TypeDynamic AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, HDR10+ certified, Gorilla Glass Victus protection"
+    },
+    {
+        "name": "Samsung Galaxy S22 Ultra (White, 256 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage256 GBRAM12  SystemAndroid 12Processor TypeExynos 990Processor Speed2.8 108MP 12MP 12MP 12MP 40MP 5G Capacity5000 Display Size17.53 cm (6.9 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ Dynamic AMOLED DisplayGPUARM Mali-G78 MP14Display TypeDynamic AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, HDR10+ certified, Gorilla Glass Victus protection"
+    },
+    {
+        "name": "Samsung Galaxy S22 Ultra (Phantom Black, 512 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage512 GBRAM12  SystemAndroid 12Processor TypeExynos 990Processor Speed2.8 108MP 12MP 12MP 12MP 40MP 5G Capacity5000 Display Size17.53 cm (6.9 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ Dynamic AMOLED DisplayGPUARM Mali-G78 MP14Display TypeDynamic AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, HDR10+ certified, Gorilla Glass Victus protection"
+    },
+    {
+        "name": "Samsung Galaxy S22 Ultra (White, 512 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage512 GBRAM12  SystemAndroid 12Processor TypeExynos 990Processor Speed2.8 108MP 12MP 12MP 12MP 40MP 5G Capacity5000 Display Size17.53 cm (6.9 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ Dynamic AMOLED DisplayGPUARM Mali-G78 MP14Display TypeDynamic AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, HDR10+ certified, Gorilla Glass Victus protection"
+    },
+    {
+        "name": "Samsung Galaxy S22 Ultra (Green, 256 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage256 GBRAM12  SystemAndroid 12Processor TypeExynos 990Processor Speed2.8 108MP 12MP 12MP 12MP 40MP 5G Capacity5000 Display Size17.53 cm (6.9 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ Dynamic AMOLED DisplayGPUARM Mali-G78 MP14Display TypeDynamic AMOLED DisplayOther Display FeaturesRefresh Rate: 120 Hz, HDR10+ certified, Gorilla Glass Victus protection"
+    },
+   {
+        "name": "Apple iPhone 13 Pro Max (Graphite, 512 GB)",
+        "ratings": 4.7,
+        "price": 139999,
+        "corpus": "Storage512 GBRAM6  SystemiOS 15Processor TypeA15 BionicProcessor Speed2.9 12MP 12MP 12MP 12MP 12MP 5G Capacity4352 Display Size17.02 cm (6.7 inch)Resolution2778 x 1284 PixelsResolution TypeSuper Retina XDR DisplayGPUCustom-built GPU (4-core)Display TypeSuper Retina XDR DisplayOther Display FeaturesProMotion technology, Ceramic Shield front cover, Water and Dust Resistance (IP68)"
+    },
+    {
+        "name": "Apple iPhone 13 Pro Max (Blue, 512 GB)",
+        "ratings": 4.7,
+        "price": 139999,
+        "corpus": "Storage512 GBRAM6  SystemiOS 15Processor TypeA15 BionicProcessor Speed2.9 12MP 12MP 12MP 12MP 12MP 5G Capacity4352 Display Size17.02 cm (6.7 inch)Resolution2778 x 1284 PixelsResolution TypeSuper Retina XDR DisplayGPUCustom-built GPU (4-core)Display TypeSuper Retina XDR DisplayOther Display FeaturesProMotion technology, Ceramic Shield front cover, Water and Dust Resistance (IP68)"
+    },
+    {
+        "name": "OnePlus 9T (Lunar Silver, 256 GB)",
+        "ratings": 4.6,
+        "price": 45999,
+        "corpus": "Storage256 GBRAM12  SystemOxygenOS (based on Android 12)Processor TypeQualcomm Snapdragon 888Processor Speed2.84 50MP 16MP 2MP 50MP 16MP 5G Capacity4500 Display Size16.63 cm (6.55 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ Fluid AMOLED DisplayGPUAdreno 660Display TypeFluid AMOLED DisplayOther Display Features120 Hz Refresh Rate, HDR10+ support, Gorilla Glass 5"
+    },
+     {
+        "name": "Google Pixel 6 Pro (Solana Gold, 128 GB)",
+        "ratings": 4.5,
+        "price": 89900,
+        "corpus": "Storage128 GBRAM8  SystemAndroid 12Processor TypeGoogle TensorProcessor Speed2.8 50MP 12MP 48MP 12MP 32MP 5G Capacity4600 Display Size15.49 cm (6.1 inch)Resolution3200 x 1440 PixelsResolution TypeQuad HD+ AMOLED DisplayGPUGoogle-designed Titan M1 chipDisplay TypeProMotion technology, Ceramic Shield front cover, Water and Dust Resistance (IP68)"
+    },
+    {
+        "name": "Xiaomi Mi 12 (Cosmic Black, 256 GB)",
+        "ratings": 4.7,
+        "price": 56999,
+        "corpus": "Storage256 GBRAM8  SystemMIUI 14 (based on Android 12)Processor TypeQualcomm Snapdragon 8 Gen 1Processor Speed3.0 108MP 12MP 48MP 8MP 32MP 5G Capacity4500 Display Size16.7 cm (6.61 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUAdreno 730GDisplay TypeAMOLED DisplayOther Display Features120 Hz Refresh Rate, HDR10+ support, Gorilla Glass Victus"
+    },
+    {
+        "name": "Sony Xperia 1 IV (Black, 256 GB)",
+        "ratings": 4.4,
+        "price": 119999,
+        "corpus": "Storage256 GBRAM12  SystemAndroid 12Processor TypeQualcomm Snapdragon 888Processor Speed2.84 12MP 12MP 12MP 12MP 8MP 5G Capacity4500 Display Size16.83 cm (6.65 inch)Resolution3840 x 1644 PixelsResolution Type4K HDR OLED DisplayGPUAdreno 660Display Type4K HDR OLED DisplayOther Display Features120 Hz Refresh Rate, HDR support, Corning Gorilla Glass Victus"
+    },
+     {
+        "name": "Samsung Galaxy Z Fold 4 (Phantom Black, 512 GB)",
+        "ratings": 4.9,
+        "price": 189999,
+        "corpus": "Storage512 GBRAM16  SystemAndroid 12Processor TypeQualcomm Snapdragon 888+Processor Speed3.0 108MP 12MP 12MP 16MP 10MP 5G Capacity4400 Display Size19.27 cm (7.6 inch)Resolution2208 x 1768 PixelsResolution TypeDynamic AMOLED 2X DisplayGPUAdreno 660Display TypeDynamic AMOLED 2X DisplayOther Display Features120 Hz Refresh Rate, HDR10+ support, Ultra Thin Glass"
+    },
+    {
+        "name": "Apple iPhone 14 Pro (Midnight Blue, 256 GB)",
+        "ratings": 4.8,
+        "price": 124999,
+        "corpus": "Storage256 GBRAM6  SystemiOS 16Processor TypeA16 BionicProcessor Speed3.2 12MP 12MP 12MP 12MP 12MP 5G Capacity3200 Display Size15.49 cm (6.1 inch)Resolution2532 x 1170 PixelsResolution TypeSuper Retina XDR DisplayGPUCustom-built GPU (4-core)Display TypeSuper Retina XDR DisplayOther Display FeaturesProMotion technology, Ceramic Shield front cover, Water and Dust Resistance (IP68)"
+    },
+    {
+        "name": "OnePlus Nord 3 (Arctic Blue, 128 GB)",
+        "ratings": 4.6,
+        "price": 29999,
+        "corpus": "Storage128 GBRAM8  SystemOxygenOS (based on Android 12)Processor TypeMediaTek Dimensity 2000Processor Speed2.9 50MP 8MP 16MP 2MP 32MP 5G Capacity4500 Display Size16.44 cm (6.48 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ Fluid AMOLED DisplayGPUMali-G78 MP20Display TypeFluid AMOLED DisplayOther Display Features90 Hz Refresh Rate, HDR10+ support, Corning Gorilla Glass 5"
+    },
+    {
+        "name": "REDMI Note 11 (Aqua Blue, 64 GB)",
+        "ratings": 4.3,
+        "price": 15999,
+        "corpus": "Storage64 GBRAM6  SystemMIUI 13 (based on Android 12)Processor TypeMediaTek Dimensity 920Processor Speed2.4 64MP 8MP 2MP 16MP 5G Capacity5000 Display Size16.59 cm (6.53 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUARM Mali-G68 MC4Display TypeFull HD+ AMOLED DisplayOther Display Features90 Hz Refresh Rate, HDR10 support"
+    },
+    {
+        "name": "REDMI K14 Pro (Cosmic Black, 128 GB)",
+        "ratings": 4.7,
+        "price": 21999,
+        "corpus": "Storage128 GBRAM8  SystemMIUI 13 (based on Android 12)Processor TypeQualcomm Snapdragon 870Processor Speed3.2 108MP 8MP 5MP 2MP 16MP 5G Capacity4500 Display Size16.94 cm (6.67 inch)Resolution2400 x 1080 PixelsResolution TypeFull HD+ AMOLED DisplayGPUGPU Adreno 650Display TypeFull HD+ AMOLED DisplayOther Display Features120 Hz Refresh Rate, HDR10+ support, Gorilla Glass 5"
+    },
+    {
+        "name": "REDMI 12 (Carbon Black, 32 GB)",
+        "ratings": 4.0,
+        "price": 9999,
+        "corpus": "Storage32 GBRAM4  SystemMIUI 13 (based on Android 12)Processor TypeMediaTek Helio G85Processor Speed2.0 50MP 2MP 2MP 8MP 5G Capacity5000 Display Size16.59 cm (6.53 inch)Resolution1600 x 720 PixelsResolution TypeHD+ DisplayGPUARM Mali-G52 MC2Display TypeHD+ DisplayOther Display Features60 Hz Refresh Rate, Waterdrop Notch Design"
+    },
+
+    # Add more smartphone data entries here
+]
+
+# Define the CSV file name
+csv_filename = "smartphones_dataset.csv"
+
+# Write smartphone data to CSV
+with open(csv_filename, mode="w", newline="", encoding="utf-8") as csv_file:
+    fieldnames = ["name", "ratings", "price", "corpus"]
+    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+    
+    writer.writeheader()
+    for smartphone in smartphones:
+        writer.writerow(smartphone)
+
+print(f"Dataset saved as {csv_filename}")
